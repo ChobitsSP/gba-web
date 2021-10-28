@@ -25,7 +25,6 @@ module.exports = {
       vuex: 'Vuex',
       'element-ui': 'ELEMENT',
       axios: 'axios',
-      xlsx: 'XLSX',
     });
   },
 };
