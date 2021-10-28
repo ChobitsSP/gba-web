@@ -4,6 +4,7 @@
 
       <button @click="LoadGame">Load Game</button>
 
+      <button @click="LinkHid">LinkHid</button>
     </el-row>
   </div>
 </template>
@@ -44,6 +45,13 @@
         // get file contents
         const fileData = await fileHandle.getFile();
         console.log(fileData);
+      },
+      async LinkHid() {
+        let devices = await navigator['hid'].getDevices();
+        console.log(devices);
+        devices.forEach(device => {
+          console.log(`HID: ${device.productName}`);
+        });
       },
     },
   }
