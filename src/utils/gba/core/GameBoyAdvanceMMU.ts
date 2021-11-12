@@ -6,6 +6,7 @@ import Serializer from "../utils/Serializer";
 import GameBoyAdvanceGPIO from "./GameBoyAdvanceGPIO";
 import FlashSavedata from "./FlashSavedata";
 import SRAMSavedata from "./SRAMSavedata";
+import EEPROMSavedata from "./EEPROMSavedata";
 
 export default class GameBoyAdvanceMMU {
   REGION_BIOS = 0x0;
