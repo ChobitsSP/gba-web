@@ -9,7 +9,7 @@ export default class MemoryView {
   ICACHE_PAGE_BITS?: any;
   PAGE_MASK?: any;
 
-  constructor(memory, offset = 0) {
+  constructor(memory: ArrayBuffer, offset = 0) {
     // this.inherit();
     this.buffer = memory;
     this.view = new DataView(
