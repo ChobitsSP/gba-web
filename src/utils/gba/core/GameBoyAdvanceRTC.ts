@@ -1,51 +1,57 @@
 export default class GameBoyAdvanceRTC {
+
+  // PINOUT: SCK | SIO | CS | -
+  pins = 0;
+  direction = 0;
+
+  totalBytes = [
+    0, // Force reset
+    0, // Empty
+    7, // Date/Time
+    0, // Force IRQ
+    1, // Control register
+    0, // Empty
+    3, // Time
+    0, // Empty
+  ];
+  bytesRemaining = 0;
+
+  // Transfer sequence:
+  // == Initiate
+  // > HI | - | LO | -
+  // > HI | - | HI | -
+  // == Transfer bit (x8)
+  // > LO | x | HI | -
+  // > HI | - | HI | -
+  // < ?? | x | ?? | -
+  // == Terminate
+  // >  - | - | LO | -
+  transferStep = 0;
+
+  reading = 0;
+  bitsRead = 0;
+  bits = 0;
+  command = -1;
+
+  control = 0x40;
+  time = [
+    0, // Year
+    0, // Month
+    0, // Day
+    0, // Day of week
+    0, // Hour
+    0, // Minute
+    0, // Second
+  ];
+
+  gpio: any;
+
+  read?: boolean;
+
   constructor(gpio) {
     this.gpio = gpio;
-
-    // PINOUT: SCK | SIO | CS | -
-    this.pins = 0;
-    this.direction = 0;
-
-    this.totalBytes = [
-      0, // Force reset
-      0, // Empty
-      7, // Date/Time
-      0, // Force IRQ
-      1, // Control register
-      0, // Empty
-      3, // Time
-      0, // Empty
-    ];
-    this.bytesRemaining = 0;
-
-    // Transfer sequence:
-    // == Initiate
-    // > HI | - | LO | -
-    // > HI | - | HI | -
-    // == Transfer bit (x8)
-    // > LO | x | HI | -
-    // > HI | - | HI | -
-    // < ?? | x | ?? | -
-    // == Terminate
-    // >  - | - | LO | -
-    this.transferStep = 0;
-
-    this.reading = 0;
-    this.bitsRead = 0;
-    this.bits = 0;
-    this.command = -1;
-
-    this.control = 0x40;
-    this.time = [
-      0, // Year
-      0, // Month
-      0, // Day
-      0, // Day of week
-      0, // Hour
-      0, // Minute
-      0, // Second
-    ];
   }
+
   setPins(nybble) {
     switch (this.transferStep) {
       case 0:

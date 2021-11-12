@@ -8,6 +8,31 @@ import FlashSavedata from "./FlashSavedata";
 import SRAMSavedata from "./SRAMSavedata";
 import EEPROMSavedata from "./EEPROMSavedata";
 
+interface ICpu {
+  cycles: number;
+  irq: {
+    audio?: any;
+    video?: any;
+    dma?: IDma[];
+  }
+}
+
+interface IDma {
+  enable: boolean;
+  width: number;
+  timing: number;
+  srcControl: number;
+  dstControl: number;
+  nextCount: number;
+  nextSource: number;
+  nextDest: number;
+  doIrq: boolean;
+  nextIRQ: number;
+  count: number;
+  repeat: boolean;
+  dest: number;
+}
+
 export default class GameBoyAdvanceMMU {
   REGION_BIOS = 0x0;
   REGION_WORKING_RAM = 0x2;
@@ -81,11 +106,10 @@ export default class GameBoyAdvanceMMU {
   PAGE_MASK = (2 << this.ICACHE_PAGE_BITS) - 1;
   bios = null;
 
-  cpu?: any;
+  cpu?: ICpu;
   memory?: any;
 
   badMemory: BadMemory;
-
 
   waitstates: number[];
   waitstatesSeq: number[];
@@ -399,7 +423,7 @@ export default class GameBoyAdvanceMMU {
     }
     return page;
   }
-  scheduleDma(number, info) {
+  scheduleDma(number: number, info: IDma) {
     switch (info.timing) {
       case this.DMA_TIMING_NOW:
         this.serviceDma(number, info);
@@ -420,13 +444,14 @@ export default class GameBoyAdvanceMMU {
             this.cpu.irq.audio.scheduleFIFODma(number, info);
             break;
           case 3:
-            this.cpu.irq.video.scheduleVCaptureDma(dma, info);
+            // ::todo not found
+            // this.cpu.irq.video.scheduleVCaptureDma(dma, info);
             break;
         }
     }
   }
   runHblankDmas() {
-    var dma;
+    var dma: IDma;
     for (var i = 0; i < this.cpu.irq.dma.length; ++i) {
       dma = this.cpu.irq.dma[i];
       if (dma.enable && dma.timing == this.DMA_TIMING_HBLANK) {
@@ -443,7 +468,7 @@ export default class GameBoyAdvanceMMU {
       }
     }
   }
-  serviceDma(number, info) {
+  serviceDma(number: number, info: IDma) {
     if (!info.enable) {
       // There was a DMA scheduled that got canceled
       return;
