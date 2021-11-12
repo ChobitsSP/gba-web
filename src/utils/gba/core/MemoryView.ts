@@ -1,5 +1,5 @@
-export class MemoryView {
-  buffer = null;
+export default class MemoryView {
+  buffer: ArrayBuffer;
   view: DataView;
   mask: number;
   mask8: number;
@@ -7,7 +7,7 @@ export class MemoryView {
   mask32: number;
   icache?: any[];
 
-  constructor(memory, offset) {
+  constructor(memory, offset = 0) {
     // this.inherit();
     this.buffer = memory;
     this.view = new DataView(
