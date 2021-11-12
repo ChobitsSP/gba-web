@@ -1,7 +1,7 @@
 import MemoryView from "./MemoryView";
 
 export default class BIOSView extends MemoryView {
-  constructor(rom, offset) {
+  constructor(rom, offset = 0) {
     super(rom, offset);
 
     this.ICACHE_PAGE_BITS = 16;

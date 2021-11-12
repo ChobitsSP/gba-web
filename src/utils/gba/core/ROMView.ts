@@ -4,7 +4,7 @@ export default class ROMView extends MemoryView {
   gpio?: any;
   mmu?: any;
 
-  constructor(rom, offset) {
+  constructor(rom, offset = 0) {
     super(rom, offset);
     this.ICACHE_PAGE_BITS = 10;
     this.PAGE_MASK = (2 << this.ICACHE_PAGE_BITS) - 1;
