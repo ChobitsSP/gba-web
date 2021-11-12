@@ -6,6 +6,8 @@ export default class MemoryView {
   mask16: number;
   mask32: number;
   icache?: any[];
+  ICACHE_PAGE_BITS?: any;
+  PAGE_MASK?: any;
 
   constructor(memory, offset = 0) {
     // this.inherit();
@@ -42,17 +44,17 @@ export default class MemoryView {
     var mem = this.view.getInt32(offset & this.mask32, true);
     return (mem >>> rotate) | (mem << (32 - rotate));
   }
-  store8(offset: number, value) {
+  store8(offset: number, value: number) {
     this.view.setInt8(offset & this.mask8, value);
   }
-  store16(offset: number, value) {
+  store16(offset: number, value: number) {
     this.view.setInt16(offset & this.mask16, value, true);
   }
-  store32(offset: number, value) {
+  store32(offset: number, value: number) {
     this.view.setInt32(offset & this.mask32, value, true);
   }
   invalidatePage(address) { }
-  replaceData(memory, offset: number) {
+  replaceData(memory: ArrayBuffer, offset: number) {
     this.buffer = memory;
     this.view = new DataView(
       this.buffer,

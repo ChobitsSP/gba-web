@@ -4,6 +4,8 @@ import BIOSView from "./BIOSView";
 import ROMView from "./ROMView";
 import Serializer from "../utils/Serializer";
 import GameBoyAdvanceGPIO from "./GameBoyAdvanceGPIO";
+import FlashSavedata from "./FlashSavedata";
+import SRAMSavedata from "./SRAMSavedata";
 
 export default class GameBoyAdvanceMMU {
   REGION_BIOS = 0x0;
