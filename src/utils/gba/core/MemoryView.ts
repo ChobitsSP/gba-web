@@ -6,8 +6,8 @@ export default class MemoryView {
   mask16: number;
   mask32: number;
   icache?: any[];
-  ICACHE_PAGE_BITS?: any;
-  PAGE_MASK?: any;
+  ICACHE_PAGE_BITS?: number;
+  PAGE_MASK?: number;
 
   constructor(memory: ArrayBuffer, offset = 0) {
     // this.inherit();
