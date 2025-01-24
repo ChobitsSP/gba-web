@@ -10,41 +10,14 @@
 </template>
 
 <script lang="ts">
-  import _ from "lodash";
-  import { CHARACTERS, MY_DATA } from "@/data/Index";
+  import { defineComponent, ref, computed } from 'vue';
+  import _ from 'lodash';
+  import { OpenRomFile } from '@/utils/FileUtils';
 
-  export default {
-    data() {
-      return {
-        names: CHARACTERS,
-        item: {
-          names: [],
-          gift_id: null,
-        },
-      };
-    },
-    computed: {
-
-    },
+  export default defineComponent({
     methods: {
       async LoadGame() {
-        const pickerOpts = {
-          types: [
-            {
-              description: 'rom',
-              accept: {
-                'application/octet-stream': ['.gba', '.gbc', '.gb']
-              }
-            },
-          ],
-          excludeAcceptAllOption: true,
-          multiple: false
-        };
-
-        const [fileHandle] = await window['showOpenFilePicker'](pickerOpts);
-        // get file contents
-        const fileData = await fileHandle.getFile();
-        console.log(fileData);
+        const fileData = await OpenRomFile();
       },
       async LinkHid() {
         let devices = await navigator['hid'].getDevices();
@@ -54,5 +27,5 @@
         });
       },
     },
-  }
+  });
 </script>

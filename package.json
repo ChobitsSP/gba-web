@@ -3,41 +3,35 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "vite",
     "dev": "vue-cli-service serve --open",
     "build": "vue-cli-service build"
   },
   "dependencies": {
-    "axios": "^0.21.1",
     "clipboard": "^1.7.1",
     "dexie": "^2.0.4",
     "element-ui": "^2.15.3",
     "file-saver": "^2.0.5",
     "jszip": "^3.5.0",
-    "lodash": "^4.17.11",
-    "moment": "^2.24.0",
+    "lodash": "^4.17.21",
+    "moment": "^2.30.1",
     "qrious": "^4.0.2",
     "qs": "^6.6.0",
     "rxjs": "^5.4.2",
-    "vue": "^2.6.6",
-    "vue-class-component": "^6.0.0",
-    "vue-property-decorator": "^7.0.0",
-    "vue-router": "^3.0.1",
-    "vue-rx": "^5.0.0",
-    "vue2-filters": "^0.2.2",
-    "vuex": "^3.0.1"
+    "vue": "^2.7.15",
+    "vue-router": "^3.6.5"
   },
   "devDependencies": {
     "@types/jquery": "^3.3.29",
     "@types/lodash": "^4.14.121",
-    "@vue/cli-plugin-babel": "^3.7.0",
-    "@vue/cli-plugin-typescript": "^3.7.0",
-    "@vue/cli-service": "^3.7.0",
-    "gulp": "^4.0.0",
-    "gulplog": "^1.0.0",
-    "require-dir": "^1.2.0",
-    "typescript": "^3.3.3",
-    "vinyl-ftp": "^0.6.1",
-    "vue-template-compiler": "^2.6.6"
+    "@vitejs/plugin-vue2": "^1.1.2",
+    "@vue/cli-plugin-babel": "^5.0.8",
+    "@vue/cli-plugin-typescript": "^5.0.8",
+    "@vue/cli-service": "^5.0.8",
+    "sass": "~1.64.1",
+    "sass-loader": "~10.4.1",
+    "typescript": "^5.6.2",
+    "vite": "^5.1.8",
+    "vite-plugin-resolve-externals": "^0.2.2"
   }
 }
