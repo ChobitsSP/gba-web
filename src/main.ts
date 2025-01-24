@@ -11,7 +11,7 @@ import router from './router';
 import './assets/app.css';
 
 import ElementUI from 'element-ui';
-Vue.use(ElementUI);
+Vue.use(ElementUI, { size: 'small' });
 
 /* eslint-disable no-new */
 new Vue({
