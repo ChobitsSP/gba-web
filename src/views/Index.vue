@@ -19,6 +19,9 @@
           const fileData = await OpenRomFile();
         },
         async LinkHid() {
+          // https://developer.mozilla.org/zh-CN/docs/Web/API/WebHID_API
+          const device = await navigator['hid'].requestDevice({ filters: [] });
+          console.log(device);
           let devices = await navigator['hid'].getDevices();
           console.log(devices);
           devices.forEach(device => {
